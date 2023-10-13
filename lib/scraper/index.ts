@@ -3,6 +3,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { extractCurrency, extractDescription, extractPrice } from "../utils";
+import { Product } from "@/types";
 
 export async function scrapeAmazonProduct(url: string) {
   if (!url) return;
@@ -59,7 +60,7 @@ export async function scrapeAmazonProduct(url: string) {
 
     const data = {
       url,
-      currency: currency || "$",
+      currency: String(currency) || "USD",
       image: imageUrls[0],
       title,
       currentPrice: Number(currentPrice) || Number(originalPrice),
